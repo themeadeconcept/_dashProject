@@ -129,6 +129,46 @@ const _ = {
     }
     return undefined;
   },
+
+  // _dash array method
+  /*
+    This method takes in an array and a number of elements to drop from the beginning
+    of the array.  Returns the array minus the numToDrop from the front.
+  */
+  drop(arr, numToDrop = 1) {
+    return arr.slice(numToDrop);
+  },
+
+  // _dash array method
+  /*
+  drops elements from the beginning of the array until an element causes the predicate function to be falsy
+  */
+  dropWhile(arr, predicate) {
+    // findIndex looks for the first truthy value, negating the value causes us to return false values until we receive a truthy
+    let dropNumber = arr.findIndex((element, index) => {
+      return !predicate(element, index, arr);
+    });
+
+    // Uses my previously created .drop() method.  This refers to the current object
+    let droppedArray = this.drop(arr, dropNumber);
+
+    return droppedArray;
+  },
+
+  // _dash array method
+  /*
+    splits an array into even chunks.  Even they aren't even, the final chunk will have the final elements
+  */
+  chunk(arr, size = 1) {
+    let chunkedArr = [];
+
+    for (let i = 0; i < arr.length; i += size) {
+      let chunks = arr.slice(i, i + size);
+      chunkedArr.push(chunks);
+    }
+
+    return chunkedArr;
+  },
 };
 
 // Do not write or modify code below this line.
